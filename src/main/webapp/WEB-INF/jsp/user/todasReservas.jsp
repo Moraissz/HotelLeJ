@@ -33,7 +33,7 @@
 
       <div class="col-sm-4 mt-4">
         <div class="card">
-          <img class="card-img-top" src="../../samira/images/room_1.jpg" alt="Card image cap">
+          <img class="card-img-top" src="/HotelLeJ/images/room_1.jpg" alt="Card image cap">
           <div class="card-header">
             <h4 class="card-title text-center">Nome do Quarto</h4>
           </div>
@@ -44,13 +44,13 @@
             <p class="card-text">Andar: 100</p>
             <p class="card-text">QtdPessoas: 100</p>
             <p class="card-text">NroBanheiros: 100</p>
-            <p class="card-text">AQUI DEVE TER UM INPUT ESCONDIDO COM O ID PARA SABER QUAL QUARTO FOI ALUGADO</p>
+            
           </div>
         </div>
       </div>
       <div class="col-sm-4 mt-4">
         <div class="card">
-          <img class="card-img-top" src="../../samira/images/room_1.jpg" alt="Card image cap">
+          <img class="card-img-top" src="/HotelLeJ/images/room_1.jpg" alt="Card image cap">
           <div class="card-header">
             <h4 class="card-title text-center">Nome do Quarto</h4>
           </div>
@@ -61,27 +61,10 @@
             <p class="card-text">Andar: 100</p>
             <p class="card-text">QtdPessoas: 100</p>
             <p class="card-text">NroBanheiros: 100</p>
-            <p class="card-text">AQUI DEVE TER UM INPUT ESCONDIDO COM O ID PARA SABER QUAL QUARTO FOI ALUGADO</p>
           </div>
         </div>
       </div>
-      <div class="col-sm-4 mt-4">
-        <div class="card">
-          <img class="card-img-top" src="../../samira/images/room_1.jpg" alt="Card image cap">
-          <div class="card-header">
-            <h4 class="card-title text-center">Nome do Quarto</h4>
-          </div>
-          <div class="card-body">
-            <p class="card-text">idReserva: 1</p>
-            <p class="card-text">Descricao: Quarto dos ricao</p>
-            <p class="card-text">Numero: 100</p>
-            <p class="card-text">Andar: 100</p>
-            <p class="card-text">QtdPessoas: 100</p>
-            <p class="card-text">NroBanheiros: 100</p>
-            <p class="card-text">AQUI DEVE TER UM INPUT ESCONDIDO COM O ID PARA SABER QUAL QUARTO FOI ALUGADO</p>
-          </div>
-        </div>
-      </div>
+   
     </div>
   </div>
   <div class="container mt-3">

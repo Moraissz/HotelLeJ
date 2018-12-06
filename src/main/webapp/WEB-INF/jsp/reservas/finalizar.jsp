@@ -53,19 +53,19 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="nomePessoa">Nome:</label>
-                    <input type="email" class="form-control" id="nomePessoa" aria-describedby="emailHelp" placeholder="Informe seu nome">
+                    <input name="nomePessoa" type="text" class="form-control" id="nomePessoa" aria-describedby="emailHelp" placeholder="Informe seu nome">
                   </div>
                   <div class="form-group">
                     <label for="documentoPessoa">Documento:</label>
-                    <input type="text" class="form-control" id="documentoPessoa" placeholder="Informe seu Documento">
+                    <input name="documentoPessoa" type="text" class="form-control" id="documentoPessoa" placeholder="Informe seu Documento">
                   </div>
                   <div class="form-group">
                     <label for="qtdAdulto">Quantidade de Adultos:</label>
-                    <input type="text" class="form-control" id="qtdAdulto" placeholder="Informe a quantidade de adulto">
+                    <input  name="qtdAdulto" type="text" class="form-control" id="qtdAdulto" placeholder="Informe a quantidade de adulto">
                   </div>
                   <div class="form-group">
                     <label for="qtdCrianca">Quantidade de Crianças:</label>
-                    <input type="text" class="form-control" id="qtdCrianca" placeholder="Informe a quantidade de criança">
+                    <input name="qtdCrianca" type="text" class="form-control" id="qtdCrianca" placeholder="Informe a quantidade de criança">
                   </div>
                 </div>
 
