@@ -28,7 +28,7 @@
       <div class="row">
         <div class="card mx-auto col-12">
           <div class="card-body">
-            <form action="">
+            <form action="/HotelLeJ/reservas/rooms">
               <div class="row">
                 <div class="col">
                   <label for="">Data de entrada</label>
