@@ -10,7 +10,7 @@ public class ConexaoFactory {
     	String DRIVER="com.mysql.cj.jdbc.Driver";
     	String URL="jdbc:mysql://localhost:3306/TrabalhoWEB";
         String USER="root";
-        String PASS="sfcJC1998";
+        String PASS="root";
         Connection conexao = null;
 
         try {

@@ -59,8 +59,8 @@
 
   <div class="container mt-2 px-0">
     <div class="row">
-      <form class="col-12 form-inline px-0" action="/HotelLeJ/reserva/finalizar">
-        <c:forEach var="quarto" items="${quartosList}">
+        <c:forEach var="quarto" items="${quartoList}">
+        <form class="col-12 form-inline px-0" action="/HotelLeJ/reserva/finalizar">
           <div class="col-sm-4 mt-4">
             <div class="card">
               <img class="card-img-top" src="/HotelLeJ/images/room_1.jpg" alt="Card image cap">
@@ -76,12 +76,12 @@
                 <input type="hidden" value="${quarto.id}">
               </div>
               <div class="card-footer text-center">
-                <input type="submit" class="btn btn-primary" value="Reservar">
+                <input  type="submit" class="btn btn-primary" value="Reservar">
               </div>
             </div>
           </div>
+          </form>
         </c:forEach>
-      </form>
     </div>
   </div>
 
