@@ -4,25 +4,40 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class ConexaoFactory {
 
-    public static Connection getConexao() throws SQLException {
-    	String DRIVER="com.mysql.cj.jdbc.Driver";
-    	String URL="jdbc:mysql://localhost:3306/TrabalhoWEB";
-        String USER="root";
-        String PASS="root";
-        Connection conexao = null;
+	 private static Context initContext;
+	    private static Context environmentContext;
+	    private static DataSource ds;
 
-        try {
-            System.out.println("Conectando com o banco de dados.");
-            Class.forName(DRIVER);
-            return DriverManager.getConnection(URL,USER,PASS);
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Erro ao carregar o driver JDBC.");
-        }
-		return conexao;
-    }
-    private ConexaoFactory() {
-    }
+	    static {
+	        try {
+	            // Obtem nosso contexto de nomes do ambiente (environment naming context)
+	            initContext = new InitialContext();
+	            environmentContext = (Context) initContext.lookup("java:comp/env");
+
+	            // Busca pela nossa fonte de dados (data source)
+	            ds = (DataSource) environmentContext.lookup("jdbc/TrabalhoWEB");
+	        } catch (NamingException ex) {
+	            Logger.getLogger(ConexaoFactory.class.getName()).log(Level.SEVERE,
+	                    "Erro buscando o recurso JNDI jdbc/TrabalhoWEB", ex);
+	        }
+	    }
+
+	    public static Connection getConexao() throws SQLException {
+	        return ds.getConnection();
+	    }
+
+	    private ConexaoFactory() {
+	    }
 }
 

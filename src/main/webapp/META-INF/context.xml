@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Context path="/TrabalhoWEB">
+    <Resource 
+        name="jdbc/TrabalhoWEB"
+        type="javax.sql.DataSource"
+        auth="Container"
+        maxTotal="100"
+        maxIdle="30"
+        maxWaitMillis="10000"
+        username="root"
+        password="root"
+        driverClassName="com.mysql.cj.jdbc.Driver"
+        jdbcUrl="jdbc:mysql://localhost:3306/TrabalhoWEB"
+        url="jdbc:mysql://localhost:3306/TrabalhoWEB"
+        factory="com.zaxxer.hikari.HikariJNDIFactory"
+    />
+</Context>
