@@ -31,7 +31,7 @@
             <form action="/HotelLeJ/user/reservaBuscada">
               <div class="form-group">
                 <label for="idReserva">ID da Reserva:</label>
-                <input type="text" class="form-control" id="idReserva" aria-describedby="emailHelp" placeholder="Informe o ID da reserva que deseja buscar">
+                <input name="id" type="text" class="form-control" id="idReserva" aria-describedby="emailHelp" placeholder="Informe o ID da reserva que deseja buscar">
               </div>
               <input type="submit" class="btn btn-primary btn-block" value="Buscar Reserva">
             </form>

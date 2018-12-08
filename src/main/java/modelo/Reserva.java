@@ -1,8 +1,12 @@
 package modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Reserva 
+import javax.enterprise.context.SessionScoped;
+
+@SessionScoped
+public class Reserva implements Serializable
 {
 	int id_reserva;
 	int numero_quarto;

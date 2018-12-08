@@ -43,8 +43,6 @@
             <p class="card-text">Numero:${reserva.numero_quarto }</p>
             <p class="card-text">Andar: ${reserva.numero_andar }</p>
             <p class="card-text">QtdPessoas: ${reserva.quantidade_pessoas }</p>
-           
-            
           </div>
         </div>
       </div>

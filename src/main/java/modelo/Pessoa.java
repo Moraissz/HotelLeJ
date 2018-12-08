@@ -5,7 +5,7 @@ public class Pessoa
 	int id_pessoa;
 	String usuario;
 	String nome;
-	String tipo;
+	String Tipo;
 	String documento;
 	int id_reserva;
 	public int getId_pessoa() {
@@ -26,11 +26,12 @@ public class Pessoa
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	public String getTipo() {
-		return tipo;
+		return Tipo;
 	}
 	public void setTipo(String tipo) {
-		this.tipo = tipo;
+		Tipo = tipo;
 	}
 	public String getDocumento() {
 		return documento;

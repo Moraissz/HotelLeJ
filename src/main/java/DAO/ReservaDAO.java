@@ -81,6 +81,34 @@ public class ReservaDAO
         }
         return reserva;
 	}
+	public ArrayList<Reserva> buscarPorUsuario(String user) throws SQLException 
+	{
+        Reserva reserva;
+        ArrayList<Reserva> reservas = new ArrayList<>();
+        String selecao = "SELECT * FROM Reserva WHERE usuario = ?";
+        try (PreparedStatement pstmt = conexao.prepareStatement(selecao)) {
+        	pstmt.setString(1,user);
+        	try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                	 reserva = new Reserva();
+                	 reserva.setId_reserva(rs.getInt(1));
+                     reserva.setNumero_quarto(rs.getInt(2));
+                     reserva.setNumero_andar(rs.getInt(3));
+                     reserva.setStatus(rs.getString(4));
+                     reserva.setDescricao(rs.getString(5));
+                     reserva.setUsuario(rs.getString(6));
+                     reserva.setQuantidade_pessoas(rs.getInt(7));
+                     reserva.setData_entrada(rs.getString(8));
+                     reserva.setData_saida(rs.getString(9));
+                     reserva.setData_checkin(rs.getString(10));
+                     reserva.setNotificacao(rs.getInt(11));
+                     reserva.setValor(Integer.parseInt(rs.getString(12)));
+                     reservas.add(reserva);
+                }
+            }
+        }
+        return reservas;
+    }
 	
 	public ArrayList<Reserva> buscartodas() throws SQLException 
 	{
@@ -166,5 +194,21 @@ public class ReservaDAO
             }
         }
         return reservas;
+    }
+	public void deletarReserva(int id) throws SQLException 
+	{
+        String delete = "DELETE FROM Reserva WHERE id_reserva = ?;";
+        try (PreparedStatement pstmt = conexao.prepareStatement(delete)) {
+            pstmt.setInt(1,id);
+            int resultado = pstmt.executeUpdate();
+            if (resultado == 1)
+            {
+            	System.out.println("Delete bem sucessido");
+            } 
+            else 
+            {
+                System.out.println("Nao deletado.");
+            }
+        }
     }
 }

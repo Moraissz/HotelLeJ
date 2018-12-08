@@ -37,12 +37,12 @@
               <h4 class="card-title text-center">Nome do Quarto</h4>
             </div>
             <div class="card-body">
-              <p class="card-text">Descricao: Quarto dos ricao</p>
-              <p class="card-text">Numero: 100</p>
-              <p class="card-text">Andar: 100</p>
-              <p class="card-text">QtdPessoas: 100</p>
-              <p class="card-text">NroBanheiros: 100</p>
-              <p class="card-text">AQUI DEVE TER UM INPUT ESCONDIDO COM O ID PARA SABER QUAL QUARTO FOI ALUGADO</p>
+            <p class="card-text">idReserva: ${reserva.id_reserva}</p>
+            <p class="card-text">Descricao: ${reserva.descricao }</p>
+            <p class="card-text">Numero:${reserva.numero_quarto }</p>
+            <p class="card-text">Andar: ${reserva.numero_andar }</p>
+            <p class="card-text">QtdPessoas: ${reserva.quantidade_pessoas }</p>
+              <p class="card-text">JA TENHO A RESERVA POIS PASSEI ELA NO ROOM/p>
             </div>
           </div>
         </div>
@@ -53,19 +53,15 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="nomePessoa">Nome:</label>
-                    <input name="nomePessoa" type="text" class="form-control" id="nomePessoa" aria-describedby="emailHelp" placeholder="Informe seu nome">
+                    <input name="pessoa.nome" type="text" class="form-control" id="nomePessoa" aria-describedby="emailHelp" placeholder="Informe seu nome">
                   </div>
                   <div class="form-group">
                     <label for="documentoPessoa">Documento:</label>
-                    <input name="documentoPessoa" type="text" class="form-control" id="documentoPessoa" placeholder="Informe seu Documento">
+                    <input name="pessoa.documento" type="text" class="form-control" id="documentoPessoa" placeholder="Informe seu Documento">
                   </div>
                   <div class="form-group">
-                    <label for="qtdAdulto">Quantidade de Adultos:</label>
-                    <input  name="qtdAdulto" type="text" class="form-control" id="qtdAdulto" placeholder="Informe a quantidade de adulto">
-                  </div>
-                  <div class="form-group">
-                    <label for="qtdCrianca">Quantidade de Crianças:</label>
-                    <input name="qtdCrianca" type="text" class="form-control" id="qtdCrianca" placeholder="Informe a quantidade de criança">
+                    <label for="qtdPessoas">Quantidade de Pessoas:</label>
+                    <input  name="pessoa.qtdPessoas" type="text" class="form-control" id="qtdAdulto" placeholder="Informe a quantidade de adulto">
                   </div>
                 </div>
 
