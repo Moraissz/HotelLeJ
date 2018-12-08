@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 
@@ -10,7 +11,7 @@
   <title>Insert title here</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
-  <link rel="stylesheet" href="/HotelLeJ/css/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 
 <body>
@@ -23,7 +24,7 @@
     <div class="row">
       <div class="card col-12 px-0">
         <div class="card-header text-center Sizeup">
-          Bem Vindo, Joaozinho
+          Bem vindo(a), <shiro:principal> </shiro:principal>
         </div>
         <div class="card-body col-12">
           <a href="/HotelLeJ/user/alterarPerfil" class="btn btn-primary btn-block">Alterar Perfil</a>

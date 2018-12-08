@@ -1,9 +1,12 @@
 <%@tag description="Header template" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="url" value="${pageContext.request.requestURI}"/>
 <c:set var="homeUrl" value="/HotelLeJ/WEB-INF/jsp/home/index.jsp"/>
 <c:set var="roomsUrl" value="/HotelLeJ/WEB-INF/jsp/reservas/rooms.jsp"/>
-<c:set var="loginUrl" value="/HotelLeJ/WEB-INF/jsp/login/home.jsp"/>
+<c:set var="loginUrl" value="/HotelLeJ/WEB-INF/jsp/auth/login.jsp"/>
+<c:set var="userUrl" value="/HotelLeJ/WEB-INF/jsp/user/profile.jsp"/>
+<c:set var="adminUrl" value="/HotelLeJ/WEB-INF/jsp/admin/profile.jsp"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +17,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
-  <link rel="stylesheet" href="HotelLeJ/css/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 
 <body>
@@ -36,8 +39,13 @@
           </li>
         </ul>
         <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-            <li class="nav-item ${url.equals(loginUrl) ? 'active': ''}"">
-              <a class="nav-link" href="/HotelLeJ/login/home"  > Login<img src="/HotelLeJ/images/avatar.png" alt=""> </a>
+            <li class="nav-item ${url.equals(loginUrl) ? 'active': ''} ${url.equals(userUrl) ? 'active': ''} ${url.equals(adminUrl) ? 'active': ''}">
+             <shiro:notAuthenticated><a class="nav-link" href="/HotelLeJ/auth/login"  > Login<img src="/HotelLeJ/images/avatar.png" alt=""> </a></shiro:notAuthenticated>
+             <shiro:hasRole name="user"><a class="nav-link" href="/HotelLeJ/user/profile"  > Profile user<img src="/HotelLeJ/images/avatar.png" alt=""> </a> </shiro:hasRole>
+             <shiro:hasRole name="admin"><a class="nav-link" href="/HotelLeJ/admin/profile"  > Profile admin<img src="/HotelLeJ/images/avatar.png" alt=""> </a> </shiro:hasRole>
+            </li>
+           <li class="nav-item ${url.equals(loginUrl) ? 'active': ''} ${url.equals(userUrl) ? 'active': ''} ${url.equals(adminUrl) ? 'active': ''}">
+             <shiro:authenticated><a class="nav-link" href="/HotelLeJ/auth/logout">Logout</a></shiro:authenticated>
             </li>
           </ul>
       </div>
