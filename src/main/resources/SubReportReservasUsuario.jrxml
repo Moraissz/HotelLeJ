@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReportReservasUsuario" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7bc8531b-7e18-43b2-be51-1ff58515406b">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
+	<parameter name="usuarioAtual" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT `TrabalhoWEB`.`Reserva`.id_reserva,
+	`TrabalhoWEB`.`Reserva`.numero_quarto,
+	`TrabalhoWEB`.`Reserva`.numero_andar,
+	`TrabalhoWEB`.`Reserva`.status,
+	`TrabalhoWEB`.`Reserva`.descricao,
+	`TrabalhoWEB`.`Reserva`.usuario,
+	`TrabalhoWEB`.`Reserva`.quantidade_pessoas,
+	`TrabalhoWEB`.`Reserva`.data_entrada,
+	`TrabalhoWEB`.`Reserva`.data_saida,
+	`TrabalhoWEB`.`Reserva`.data_checkin,
+	`TrabalhoWEB`.`Reserva`.notificacao,
+	`TrabalhoWEB`.`Reserva`.valor
+FROM `TrabalhoWEB`.`Reserva`
+Where `TrabalhoWEB`.`Reserva`.usuario = $P{usuarioAtual}]]>
+	</queryString>
+	<field name="id_reserva" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_reserva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserva"/>
+	</field>
+	<field name="numero_quarto" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="numero_quarto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserva"/>
+	</field>
+	<field name="numero_andar" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="numero_andar"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserva"/>
+	</field>
+	<field name="status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserva"/>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="descricao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserva"/>
+	</field>
+	<field name="usuario" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="usuario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserva"/>
+	</field>
+	<field name="quantidade_pessoas" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="quantidade_pessoas"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserva"/>
+	</field>
+	<field name="data_entrada" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="data_entrada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserva"/>
+	</field>
+	<field name="data_saida" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="data_saida"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserva"/>
+	</field>
+	<field name="data_checkin" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="data_checkin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserva"/>
+	</field>
+	<field name="notificacao" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="notificacao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserva"/>
+	</field>
+	<field name="valor" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="valor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserva"/>
+	</field>
+	<variable name="ValorTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[Double.valueOf($F{valor})]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="79" uuid="40fb4499-67c4-449d-9c13-145deca22d27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Reservas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="225" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="6" width="100" height="30" uuid="30ca85d6-11f5-44cc-a353-d1e1fb8e925f"/>
+				<textFieldExpression><![CDATA[$F{id_reserva}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="6" width="100" height="30" uuid="7ed1dea2-785e-482f-a16f-f649591733ff"/>
+				<text><![CDATA[id_reserva]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="40" width="100" height="30" uuid="7bcaf461-5d3d-4410-ba8f-908a0cc0613e"/>
+				<textFieldExpression><![CDATA[$F{numero_quarto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="100" height="30" uuid="c9875b10-03a0-4c8a-8e71-5e6cdb35eb94"/>
+				<text><![CDATA[numero_quarto]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="70" width="100" height="30" uuid="179d6270-f6db-4cac-9e68-dc837360bc88"/>
+				<textFieldExpression><![CDATA[$F{numero_andar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="70" width="100" height="30" uuid="8d11c319-ef17-4f02-a389-18713b8cc705"/>
+				<text><![CDATA[numero_andar]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="90" width="100" height="30" uuid="ea02981e-3223-4fb4-9669-249d3879a970"/>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="90" width="100" height="30" uuid="1bc4d126-c467-4f1a-8a56-d196e7266d56"/>
+				<text><![CDATA[status]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="120" width="100" height="30" uuid="c951ee39-6e48-4ff5-8dc8-120eee1567db"/>
+				<textFieldExpression><![CDATA[$F{quantidade_pessoas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="120" width="100" height="30" uuid="31ed21c3-880f-4443-b20b-d7ad89b740fe"/>
+				<text><![CDATA[quantidade_pessoas]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="150" width="100" height="30" uuid="b68fdcf9-5977-44c2-8b68-d3ec51a1e643"/>
+				<textFieldExpression><![CDATA[$F{data_entrada}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="150" width="100" height="30" uuid="dfb28280-1993-4153-9d10-21d7dade0b3b"/>
+				<text><![CDATA[data_entrada]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="180" width="100" height="30" uuid="9086127d-a9d0-4f87-9ee0-8dbd223121fc"/>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="180" width="100" height="30" uuid="4703241d-8d71-400c-8116-77b817cb45be"/>
+				<text><![CDATA[valor]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="224" width="555" height="1" uuid="b36b0e77-08e9-4a32-ada5-7c1c20b8a081"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

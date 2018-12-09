@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioUsuario" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32dd927a-37af-42ec-b556-7ef5460f4493">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[YFRyYWJhbGhvV0VCYC5gVXN1YXJpb2AgQVMgLDQ1LDUzLGY3NmE0ZDAwLWJlODEtNDI5Yi04NDVj
+LTI4YTFlZTUyNDVhZTs=]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<parameter name="usuarioAtual" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT `TrabalhoWEB`.`Usuario`.usuario,
+	`TrabalhoWEB`.`Usuario`.tipo,
+	`TrabalhoWEB`.`Usuario`.senha
+FROM `TrabalhoWEB`.`Usuario`WHERE 
+	 `TrabalhoWEB`.`Usuario`.usuario =$P{usuarioAtual}]]>
+	</queryString>
+	<field name="usuario" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="usuario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Usuario"/>
+	</field>
+	<field name="tipo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tipo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Usuario"/>
+	</field>
+	<field name="senha" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="senha"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Usuario"/>
+	</field>
+	<variable name="VTotal" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="-20" y="0" width="595" height="79" uuid="f408c0dd-7f93-4ead-b5c7-8355ff16b4fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Relatório Usuario]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="265" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="0" width="100" height="30" uuid="2c847016-82a9-42fb-b567-5b885d529402"/>
+				<textFieldExpression><![CDATA[$F{usuario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="562baa81-fc40-4ef4-aaaa-d7f5a2fcf6a7"/>
+				<text><![CDATA[usuario]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="30" width="100" height="30" uuid="01743ac9-459b-4d20-af84-537fa3332405"/>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="30" width="100" height="30" uuid="8b123af5-a40c-48ec-8c2c-6355f27a978c"/>
+				<text><![CDATA[tipo]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="70" width="550" height="43" uuid="fc4cac4a-0728-4904-aca7-0991c8b9ad69"/>
+				<subreportParameter name="usuarioAtual">
+					<subreportParameterExpression><![CDATA[$F{usuario}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="ValorTotal" toVariable="VTotal" calculation="Sum"/>
+				<subreportExpression><![CDATA["SubReportReservasUsuario.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="81" splitType="Stretch">
+			<textField>
+				<reportElement x="370" y="40" width="100" height="30" uuid="fb539db6-edfa-4345-b985-7265bf5d2dcc"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="475" y="40" width="100" height="30" uuid="19c64269-8894-45a6-b50c-1e1342589dd2"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="30" width="100" height="30" uuid="c6893f09-8146-4c9d-a730-eb9829edc663"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="50">
+			<staticText>
+				<reportElement x="350" y="10" width="100" height="30" uuid="75bbee44-3809-4b70-86ab-307de215e8a3"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ValorTotal:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="470" y="10" width="100" height="30" uuid="69777be0-35a1-49e0-9a3a-a7b2b21bf93a"/>
+				<textFieldExpression><![CDATA[$V{VTotal} != null ?  "R$" + $V{VTotal} : ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

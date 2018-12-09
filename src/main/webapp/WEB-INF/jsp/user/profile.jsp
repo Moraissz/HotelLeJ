@@ -30,7 +30,7 @@
           <a href="/HotelLeJ/user/alterarPerfil" class="btn btn-primary btn-block">Alterar Perfil</a>
           <a href="/HotelLeJ/user/todasReservas" class="btn btn-primary btn-block">Minhas reservas</a>
           <a href="/HotelLeJ/user/buscarReserva" class="btn btn-primary btn-block">Buscar reserva específica</a>
-          <a href="#" class="btn btn-primary btn-block">Gerar Relatório com todas as suas reservas</a>
+          <a href="/HotelLeJ/user/relatorio" class="btn btn-primary btn-block">Gerar Relatório com todas as suas reservas</a>
         </div>
       </div>
     </div>

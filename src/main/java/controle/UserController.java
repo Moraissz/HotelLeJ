@@ -1,19 +1,32 @@
 package controle;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
+import DAO.ConexaoFactory;
 import DAO.DAOFactory;
 import DAO.ReservaDAO;
 import br.com.caelum.vraptor.Controller;
-import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.observer.download.Download;
+import br.com.caelum.vraptor.observer.download.InputStreamDownload;
 import modelo.Reserva;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 
 @Controller
 public class UserController {
@@ -102,5 +115,33 @@ public class UserController {
 	public void sucesso() {
 		
 	}
+	public Download relatorio() {
+		Subject usuarioAtual = SecurityUtils.getSubject( );
+		System.out.println(usuarioAtual.getPrincipal( ).toString( ));
+		 ByteArrayOutputStream exported = new ByteArrayOutputStream();
 
-}
+		    try {
+		      InputStream arquivoJasper;
+		      arquivoJasper = getClass().getResourceAsStream("/RelatorioUsuario.jasper");
+		      var conexao = ConexaoFactory.getConexao();
+		      Map<String, Object> parametros = new HashMap<>();
+	           parametros.put("usuarioAtual", usuarioAtual.getPrincipal().toString());
+		      JasperPrint print = JasperFillManager.fillReport(arquivoJasper, parametros ,conexao);
+
+		      JRExporter exporter = new JRPdfExporter();
+		      exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, exported);
+		      exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
+
+		      exporter.exportReport();
+		    } catch (JRException ex) {
+		      System.out.println("Problemas na geracao do PDF." + "\n" + ex);
+		    } catch (SQLException ex) {
+		      DAOFactory.mostrarSQLException(ex);
+		    }
+		    byte[] content = exported.toByteArray();
+		    return new InputStreamDownload(new ByteArrayInputStream(content), "application/pdf", "Relatorio-Usuario", false,
+		        content.length);
+		  }
+	}
+
+

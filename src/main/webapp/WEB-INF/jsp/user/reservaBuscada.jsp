@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="status" value="Reservado"/>
 <!DOCTYPE html>
 <html>
 
@@ -42,9 +43,17 @@
             <p class="card-text">Status: ${reserva.status} </p>
             </div>
             <div class="card-footer">
+               <form action="">
                 <a href="/HotelLeJ/user/alterarReserva" class="btn btn-primary btn-block">Alterar Reserva</a>
-                <a href="/HotelLeJ/user/reservaDeletada" class="btn btn-primary btn-block">Deletar Reserva</a>
-                <a href="#" class="btn btn-success btn-block">Fazer Check-in</a>
+               </form>
+               
+                <form action="/HotelLeJ/user/reservaDeletada" class="my-2">
+                <button type="submit"  class="btn btn-primary btn-block" ${reserva.status.equals(status) ? 'disabled="disabled"' : ''}>Deletar Reserva</button>
+                </form>
+                <form action="" >
+                 <a href="#" class="btn btn-success btn-block">Fazer Check-in</a>
+                </form>
+               
             </div>
             <a href="/HotelLeJ/user/profile" class="btn btn-outline-dark btn-block mt-2">Back</a>
           </div>
