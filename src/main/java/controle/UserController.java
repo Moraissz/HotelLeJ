@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,8 +20,10 @@ import DAO.ConexaoFactory;
 import DAO.DAOFactory;
 import DAO.ReservaDAO;
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.observer.download.Download;
 import br.com.caelum.vraptor.observer.download.InputStreamDownload;
+import helper.Datas;
 import modelo.Reserva;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
@@ -32,6 +36,8 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 public class UserController {
 	@Inject
 	private Reserva reserva;
+	@Inject
+    private Result result;
 	
 	public void profile() {
 		//Como ver o usuario Atual xD
@@ -39,8 +45,24 @@ public class UserController {
 		//System.out.println(usuarioAtual.getPrincipal( ).toString( ));
 		
 	}
-	public void alterarReserva() {
-		
+	public Reserva alterarReserva() {
+		 
+		try {
+			DAOFactory.abrirConexao();
+			ReservaDAO dao = DAOFactory.criarReservaDAO();
+			reserva = dao.buscarreserva(reserva.getId_reserva());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				DAOFactory.fecharConexao();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return reserva;
 	}
 	public void alterarPerfil() {
 		
@@ -49,12 +71,15 @@ public class UserController {
 		
 	}
 	public Reserva reservaBuscada(int id) {
-			
 			reserva.setId_reserva(id);
+			int tamanho1 = 0;
+			Boolean isCheckInDay = false;
 			try {
 				DAOFactory.abrirConexao();
 				ReservaDAO dao = DAOFactory.criarReservaDAO();
 				reserva = dao.buscarreserva(id);
+				Period periodo1 = Period.between(LocalDate.parse(reserva.getData_entrada()),LocalDate.now()); //data saida é exclusivo
+				tamanho1 = periodo1.getDays();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -66,6 +91,9 @@ public class UserController {
 					e.printStackTrace();
 				}
 			}
+			System.out.println("Tamanho1" + tamanho1);
+			isCheckInDay = tamanho1 == 1 || tamanho1 == 0 ?  true :false; 
+			result.include("checkInDay", isCheckInDay);
 			return reserva;
 	}
 	public List<Reserva> todasReservas() {
@@ -91,8 +119,28 @@ public class UserController {
 		
 		
 	}
-	public void reservaDeletada() {
+	public void checkInFeito() {
+		try {
+			DAOFactory.abrirConexao();
+			ReservaDAO dao = DAOFactory.criarReservaDAO();
+			dao.ConfirmarCheckIn(reserva.getId_reserva());
+			result.include("checkIn","Check in Confirmado");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			result.include("checkIn","Houve Problema no CheckIn");
+			e.printStackTrace();
+		}finally {
+			try {
+				DAOFactory.fecharConexao();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
+		
+	}
+	public void reservaDeletada() {
 		try {
 			DAOFactory.abrirConexao();
 			ReservaDAO dao = DAOFactory.criarReservaDAO();
@@ -112,7 +160,49 @@ public class UserController {
 		
 	}
 	
-	public void sucesso() {
+	public void sucesso(String dataEntrada, String dataSaida) {
+		List<Reserva> reservasQuarto = new ArrayList<>();
+		List<Reserva> reservas= new ArrayList<>();
+		LocalDate dateEntrada = LocalDate.parse(dataEntrada);
+		LocalDate dateSaida = LocalDate.parse(dataSaida);
+		Boolean estado = null;
+		String mensagem = "";
+		try {
+			DAOFactory.abrirConexao();
+			ReservaDAO dao = DAOFactory.criarReservaDAO();
+			reserva = dao.buscarreserva(reserva.getId_reserva());
+			reservasQuarto = dao.buscar_por_quarto(reserva.getNumero_quarto(), reserva.getNumero_andar());
+			for(Reserva reservaAtual: reservasQuarto){
+				  if(reservaAtual.getStatus().equals("Reservado") && reservaAtual.getId_reserva() != reserva.getId_reserva()) {
+					  reservas.add(reservaAtual);
+				  }
+				}
+			for(Reserva reservaAtual: reservas){
+				   LocalDate dataInicioReserva = LocalDate.parse(reservaAtual.getData_entrada());
+				   LocalDate dataSaidaReserva = LocalDate.parse(reservaAtual.getData_saida());
+				   estado = Datas.comparardatas(dateEntrada, dateSaida, dataInicioReserva, dataSaidaReserva);
+				   if(!estado) {
+					   mensagem = "Você nao pode alterar para esta data";
+					   break;
+				   }
+				}
+			if(estado) {
+				dao.alterarReserva(dataEntrada, dataSaida, reserva.getId_reserva());
+				mensagem = "Reserva Alterada Com sucesso";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				DAOFactory.fecharConexao();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		result.include("mensagem", mensagem);
+		
 		
 	}
 	public Download relatorio() {

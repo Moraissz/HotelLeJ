@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="status" value="Reservado"/>
+<c:set var="checkIn" value="${checkInDay}"></c:set>
 <!DOCTYPE html>
 <html>
 
@@ -43,15 +43,18 @@
             <p class="card-text">Status: ${reserva.status} </p>
             </div>
             <div class="card-footer">
-               <form action="">
-                <a href="/HotelLeJ/user/alterarReserva" class="btn btn-primary btn-block">Alterar Reserva</a>
+               <form action="/HotelLeJ/user/alterarReserva">
+                <button type="submit"  class="btn btn-primary btn-block" ${reserva.status.equals('Finalizado') || reserva.status.equals('Confirmado') ? 'disabled="disabled"' : ''}>Alterar Reserva</button>
                </form>
                
                 <form action="/HotelLeJ/user/reservaDeletada" class="my-2">
-                <button type="submit"  class="btn btn-primary btn-block" ${reserva.status.equals(status) ? 'disabled="disabled"' : ''}>Deletar Reserva</button>
+                <button type="submit"  class="btn btn-primary btn-block" ${reserva.status.equals('Finalizado') || reserva.status.equals('Confirmado') ? 'disabled="disabled"' : ''}>Deletar Reserva</button>
                 </form>
-                <form action="" >
-                 <a href="#" class="btn btn-success btn-block">Fazer Check-in</a>
+                <form action="/HotelLeJ/user/checkInFeito" >
+                 <button type="submit" class="btn btn-success btn-block"  
+                 ${reserva.status.equals('Finalizado') || reserva.status.equals('Confirmado') ? 'disabled="disabled"' : ''}
+                 ${checkInDay  ? '' : 'disabled="disabled"'}
+                 >Fazer Check-in</button>
                 </form>
                
             </div>

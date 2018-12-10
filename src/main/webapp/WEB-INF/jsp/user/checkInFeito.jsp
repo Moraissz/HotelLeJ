@@ -23,7 +23,7 @@
     <div class="row">
       <div class="card text-white bg-success col-12 px-0">
         <div class="card-body">
-        <p class="card-text">${mensagem }</p>
+        <p class="card-text">${checkIn}</p>
         </div>
       </div>
     </div>

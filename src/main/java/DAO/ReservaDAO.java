@@ -167,13 +167,14 @@ public class ReservaDAO
         return reservas;
     }
 	
-	public ArrayList<Reserva> buscar_por_id_do_quarto(int id) throws SQLException 
+	public ArrayList<Reserva> buscar_por_quarto(int nq, int na) throws SQLException 
 	{
         Reserva reserva;
         ArrayList<Reserva> reservas = new ArrayList<>();
-        String selecao = "SELECT * FROM Reserva WHERE numero_quarto = ?";
+        String selecao = "SELECT * FROM Reserva WHERE numero_quarto = ? and numero_andar = ?";
         try (PreparedStatement pstmt = conexao.prepareStatement(selecao)) {
-        	pstmt.setInt(1,id);
+        	pstmt.setInt(1,nq);
+        	pstmt.setInt(2,na);
         	try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                 	 reserva = new Reserva();
@@ -195,6 +196,43 @@ public class ReservaDAO
         }
         return reservas;
     }
+	public void alterarReserva(String dataEntrada,String dataSaida, int id) throws SQLException 
+	{
+        String update = "UPDATE Reserva SET data_entrada = ?, data_saida = ? Where id_reserva = ? "; 
+        try (PreparedStatement pstmt = conexao.prepareStatement(update, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        	pstmt.setString(1, dataEntrada);
+        	pstmt.setString(2, dataSaida);
+        	pstmt.setInt(3, id);
+            int resultado = pstmt.executeUpdate();
+            if (resultado == 1)
+            {
+            
+				System.out.println("\nUpdate bem sucedido.");
+            } 
+            else 
+            {
+                System.out.println("Rip Update.");
+            }
+        }
+    }
+	public void ConfirmarCheckIn( int id) throws SQLException 
+	{
+        String update = "UPDATE Reserva SET status = 'Confirmado' Where id_reserva = ? "; 
+        try (PreparedStatement pstmt = conexao.prepareStatement(update, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        	pstmt.setInt(1, id);
+            int resultado = pstmt.executeUpdate();
+            if (resultado == 1)
+            {
+            
+				System.out.println("\nCheckIn Confirmado.");
+            } 
+            else 
+            {
+                System.out.println("Rip CheckIn.");
+            }
+        }
+    }
+	
 	public void deletarReserva(int id) throws SQLException 
 	{
         String delete = "DELETE FROM Reserva WHERE id_reserva = ?;";
