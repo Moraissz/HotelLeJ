@@ -84,25 +84,29 @@ Where `TrabalhoWEB`.`Reserva`.usuario = $P{usuarioAtual}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="80" splitType="Stretch">
+		<band height="92" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="79" uuid="40fb4499-67c4-449d-9c13-145deca22d27"/>
+				<reportElement x="0" y="0" width="555" height="50" uuid="40fb4499-67c4-449d-9c13-145deca22d27"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font size="24"/>
 				</textElement>
 				<text><![CDATA[Reservas]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="100" height="30" uuid="422cc55b-e386-46dc-864d-fc9af3861911"/>
+				<text><![CDATA[Reserva]]></text>
+			</staticText>
 		</band>
 	</title>
 	<detail>
-		<band height="225" splitType="Stretch">
+		<band height="256" splitType="Stretch">
 			<textField>
 				<reportElement x="100" y="6" width="100" height="30" uuid="30ca85d6-11f5-44cc-a353-d1e1fb8e925f"/>
 				<textFieldExpression><![CDATA[$F{id_reserva}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="6" width="100" height="30" uuid="7ed1dea2-785e-482f-a16f-f649591733ff"/>
-				<text><![CDATA[id_reserva]]></text>
+				<text><![CDATA[ID Reserva:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="100" y="40" width="100" height="30" uuid="7bcaf461-5d3d-4410-ba8f-908a0cc0613e"/>
@@ -110,7 +114,7 @@ Where `TrabalhoWEB`.`Reserva`.usuario = $P{usuarioAtual}]]>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="40" width="100" height="30" uuid="c9875b10-03a0-4c8a-8e71-5e6cdb35eb94"/>
-				<text><![CDATA[numero_quarto]]></text>
+				<text><![CDATA[Número quarto:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="100" y="70" width="100" height="30" uuid="179d6270-f6db-4cac-9e68-dc837360bc88"/>
@@ -118,7 +122,7 @@ Where `TrabalhoWEB`.`Reserva`.usuario = $P{usuarioAtual}]]>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="70" width="100" height="30" uuid="8d11c319-ef17-4f02-a389-18713b8cc705"/>
-				<text><![CDATA[numero_andar]]></text>
+				<text><![CDATA[Número andar]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="100" y="90" width="100" height="30" uuid="ea02981e-3223-4fb4-9669-249d3879a970"/>
@@ -126,7 +130,7 @@ Where `TrabalhoWEB`.`Reserva`.usuario = $P{usuarioAtual}]]>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="90" width="100" height="30" uuid="1bc4d126-c467-4f1a-8a56-d196e7266d56"/>
-				<text><![CDATA[status]]></text>
+				<text><![CDATA[Status:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="100" y="120" width="100" height="30" uuid="c951ee39-6e48-4ff5-8dc8-120eee1567db"/>
@@ -134,7 +138,7 @@ Where `TrabalhoWEB`.`Reserva`.usuario = $P{usuarioAtual}]]>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="120" width="100" height="30" uuid="31ed21c3-880f-4443-b20b-d7ad89b740fe"/>
-				<text><![CDATA[quantidade_pessoas]]></text>
+				<text><![CDATA[Quantidade pessoas:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="100" y="150" width="100" height="30" uuid="b68fdcf9-5977-44c2-8b68-d3ec51a1e643"/>
@@ -142,7 +146,7 @@ Where `TrabalhoWEB`.`Reserva`.usuario = $P{usuarioAtual}]]>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="150" width="100" height="30" uuid="dfb28280-1993-4153-9d10-21d7dade0b3b"/>
-				<text><![CDATA[data_entrada]]></text>
+				<text><![CDATA[Data entrada:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="100" y="180" width="100" height="30" uuid="9086127d-a9d0-4f87-9ee0-8dbd223121fc"/>
@@ -150,10 +154,10 @@ Where `TrabalhoWEB`.`Reserva`.usuario = $P{usuarioAtual}]]>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="180" width="100" height="30" uuid="4703241d-8d71-400c-8116-77b817cb45be"/>
-				<text><![CDATA[valor]]></text>
+				<text><![CDATA[Valor:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="224" width="555" height="1" uuid="b36b0e77-08e9-4a32-ada5-7c1c20b8a081"/>
+				<reportElement x="0" y="224" width="540" height="1" uuid="b36b0e77-08e9-4a32-ada5-7c1c20b8a081"/>
 			</line>
 		</band>
 	</detail>

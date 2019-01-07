@@ -20,7 +20,14 @@ public class Reserva implements Serializable
 	String data_checkin;
 	int notificacao;
 	int valor;
-	ArrayList<Pessoa> pessoas = new ArrayList<>();;
+	ArrayList<Pessoa> pessoas = new ArrayList<>();
+	String telefone;
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 	public ArrayList<Pessoa> getPessoas() {
 		return pessoas;
 	}

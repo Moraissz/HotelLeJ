@@ -49,7 +49,7 @@ FROM `TrabalhoWEB`.`Usuario`WHERE
 			</textField>
 			<staticText>
 				<reportElement x="0" y="0" width="100" height="30" uuid="562baa81-fc40-4ef4-aaaa-d7f5a2fcf6a7"/>
-				<text><![CDATA[usuario]]></text>
+				<text><![CDATA[Nome usuário:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="100" y="30" width="100" height="30" uuid="01743ac9-459b-4d20-af84-537fa3332405"/>
@@ -57,7 +57,7 @@ FROM `TrabalhoWEB`.`Usuario`WHERE
 			</textField>
 			<staticText>
 				<reportElement x="0" y="30" width="100" height="30" uuid="8b123af5-a40c-48ec-8c2c-6355f27a978c"/>
-				<text><![CDATA[tipo]]></text>
+				<text><![CDATA[Tipo:]]></text>
 			</staticText>
 			<subreport>
 				<reportElement x="0" y="70" width="550" height="43" uuid="fc4cac4a-0728-4904-aca7-0991c8b9ad69"/>

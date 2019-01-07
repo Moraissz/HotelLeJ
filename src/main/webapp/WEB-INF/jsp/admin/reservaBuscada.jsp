@@ -29,20 +29,39 @@
 
             <img class="card-img-top" src="/HotelLeJ/images/room_1.jpg" alt="Card image cap">
             <div class="card-header">
-              <h4 class="card-title text-center">Nome do Quarto</h4>
+              <h4 class="card-title text-center">Quarto</h4>
             </div>
             <div class="card-body">
-              <p class="card-text">idReserva: 1</p>
-              <p class="card-text">Descricao: Quarto dos ricao</p>
-              <p class="card-text">Numero: 100</p>
-              <p class="card-text">Andar: 100</p>
-              <p class="card-text">QtdPessoas: 100</p>
-              <p class="card-text">NroBanheiros: 100</p>
-              <p class="card-text">AQUI DEVE TER UM INPUT ESCONDIDO COM O ID PARA SABER QUAL QUARTO FOI ALUGADO</p>
+            <p  class="card-text">ID Reserva: ${reserva.id_reserva}</p>
+            <p  class="card-text">Usuario: ${reserva.usuario}</p>
+            <p class="card-text">Descricao: ${reserva.descricao }</p>
+            <p class="card-text">Numero quarto:${reserva.numero_quarto }</p>
+            <p class="card-text">Andar: ${reserva.numero_andar }</p>
+            <p class="card-text">Quantidade de pessoas: ${reserva.quantidade_pessoas }</p>
+            <p class="card-text">Data Entrada: ${reserva.data_entrada} </p>
+            <p class="card-text">Data Saida: ${reserva.data_saida} </p>
+            <p class="card-text">Checkin: ${reserva.data_checkin} </p>
+            <p class="card-text">Valor: ${reserva.valor} </p>
+            <p class="card-text">Status: ${reserva.status} </p>
             </div>
             <div class="card-footer">
-                <a href="/HotelLeJ/admin/alterarReserva" class="btn btn-primary btn-block">Alterar Reserva</a>
-                <a href="#" class="btn btn-primary btn-block">Deletar Reserva</a>
+                <form action="/HotelLeJ/admin/reservaDeletada">
+                  <button type="submit"  class="btn btn-primary btn-block" ${reserva.status.equals('Finalizado') || reserva.status.equals('Confirmado') ? 'disabled="disabled"' : ''}
+                  ${checkInDay  ? '' : 'disabled="disabled"'}
+                  >Deletar Reserva</button>
+                </form>
+               
+                <form action="/HotelLeJ/admin/alterarReserva" class="my-2">
+                <button type="submit"  class="btn btn-primary btn-block" ${reserva.status.equals('Finalizado') || reserva.status.equals('Confirmado') ? 'disabled="disabled"' : ''}
+                 ${checkInDay2  ? '' : 'disabled="disabled"'}
+                >Alterar Reserva</button>
+                </form>
+                
+                <form action="/HotelLeJ/admin/reservaFinalizada">
+                  <button type="submit"  class="btn btn-primary btn-block" ${reserva.status.equals('Finalizado') ? 'disabled="disabled"' : ''}
+                   ${checkInDay3  ? '' : 'disabled="disabled"'}
+                  >Finalizar Reserva</button>
+                </form>
             </div>
             <a href="/HotelLeJ/admin/profile" class="btn btn-outline-dark btn-block mt-2">Back</a>
           </div>

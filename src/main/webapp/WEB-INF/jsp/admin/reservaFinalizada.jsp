@@ -22,15 +22,13 @@
   <div class="container mt-2">
     <div class="row">
       <div class="card text-white bg-success col-12 px-0">
-        <div class="card-body">
-        <p class="card-text">${mensagem }</p>
-        </div>
+        <div class="card-body"> Reserva finalizada com sucesso</div>
       </div>
     </div>
   </div>
               <div class="container mt-3">
       <div class="row">
-        <a href="/HotelLeJ/admin/profile" class="btn btn-outline-dark btn-block mt-2">Back</a>
+        <a href="/HotelLeJ/user/profile" class="btn btn-outline-dark btn-block mt-2">Back</a>
       </div>
     </div>
           

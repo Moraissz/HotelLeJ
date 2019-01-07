@@ -36,14 +36,15 @@
             <div class="card-header">
               <h4 class="card-title text-center">Nome do Quarto</h4>
             </div>
-            <div class="card-body">
-              <p class="card-text">Descricao: Quarto dos ricao</p>
-              <p class="card-text">Numero: 100</p>
-              <p class="card-text">Andar: 100</p>
-              <p class="card-text">QtdPessoas: 100</p>
-              <p class="card-text">NroBanheiros: 100</p>
-              <p class="card-text">AQUI DEVE TER UM INPUT ESCONDIDO COM O ID PARA SABER QUAL QUARTO FOI ALUGADO</p>
-            </div>
+            <p  class="card-text">ID Reserva: ${reserva.id_reserva}</p>
+            <p class="card-text">Descricao: ${reserva.descricao }</p>
+            <p class="card-text">Numero quarto:${reserva.numero_quarto }</p>
+            <p class="card-text">Andar: ${reserva.numero_andar }</p>
+            <p class="card-text">Quantidade de pessoas: ${reserva.quantidade_pessoas }</p>
+            <p class="card-text">Data Entrada: ${reserva.data_entrada} </p>
+            <p class="card-text">Data Saida: ${reserva.data_saida} </p>
+            <p class="card-text">Valor: ${reserva.valor} </p>
+            <p class="card-text">Status: ${reserva.status} </p>
           </div>
         </div>
         <div class="col-6">
@@ -53,16 +54,17 @@
               <div class="card-body">
                 <div class="form-group">
                   <label for="dataEntrada">Data Entrada:</label>
-                  <input type="email" class="form-control" id="dataEntrada" aria-describedby="emailHelp" placeholder="Informe a nova data de Entrada">
+                  <input name="dataEntrada" type="date" class="form-control" id="dataEntrada" aria-describedby="emailHelp" placeholder="Informe a nova data de Entrada">
                 </div>
                 <div class="form-group">
                   <label for="dataSaida">Data Saída</label>
-                  <input type="text" class="form-control" id="dataSaida" placeholder="Informe a nova Data de Saida">
+                  <input name="dataSaida" type="date" class="form-control" id="dataSaida" placeholder="Informe a nova Data de Saida">
                 </div>
               </div>
 
             </div>
         </div>
+        
       </div>
       </div>
 

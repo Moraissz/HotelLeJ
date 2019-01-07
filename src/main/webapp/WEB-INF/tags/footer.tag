@@ -27,7 +27,7 @@
               <div class="card-body">
                 <h5 class="card-title">Whatsapp & E-mail</h5>
                 <p class="card-text">(34)9123-0410 - contato@hotellej.com.br</p>
-                <input type="submit" class="btn btn-primary" value="alo">
+               
               </div>
               <div class="card-footer text-muted">
                 Criado por Lucas e João

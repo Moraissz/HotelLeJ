@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import modelo.Pessoa;
@@ -21,7 +22,7 @@ public class ReservaDAO
 	
 	public void criarreserva(Reserva reserva) throws SQLException 
 	{
-        String insercao = "INSERT INTO Reserva (numero_quarto, numero_andar, status, descricao, usuario, quantidade_pessoas, data_entrada, data_saida, data_checkin, notificacao, valor) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+        String insercao = "INSERT INTO Reserva (numero_quarto, numero_andar, status, descricao, usuario, quantidade_pessoas, data_entrada, data_saida, data_checkin, notificacao, valor, telefone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
         try (PreparedStatement pstmt = conexao.prepareStatement(insercao, PreparedStatement.RETURN_GENERATED_KEYS)) {
             pstmt.setInt(1,reserva.getNumero_quarto());
             pstmt.setInt(2,reserva.getNumero_andar());
@@ -33,7 +34,8 @@ public class ReservaDAO
             pstmt.setString(8,reserva.getData_saida());
             pstmt.setString(9,reserva.getData_checkin());
             pstmt.setInt(10,reserva.getNotificacao());
-            pstmt.setString(11,"0");
+            pstmt.setString(11,Integer.toString(reserva.getValor()));
+            pstmt.setString(12,reserva.getTelefone());
             int resultado = pstmt.executeUpdate();
             if (resultado == 1)
             {
@@ -76,6 +78,7 @@ public class ReservaDAO
                     reserva.setData_checkin(rs.getString(10));
                     reserva.setNotificacao(rs.getInt(11));
                     reserva.setValor(Integer.parseInt(rs.getString(12)));
+                    reserva.setTelefone(rs.getString(13));
                 }
             }
         }
@@ -103,6 +106,7 @@ public class ReservaDAO
                      reserva.setData_checkin(rs.getString(10));
                      reserva.setNotificacao(rs.getInt(11));
                      reserva.setValor(Integer.parseInt(rs.getString(12)));
+                     reserva.setTelefone(rs.getString(13));
                      reservas.add(reserva);
                 }
             }
@@ -131,6 +135,7 @@ public class ReservaDAO
                      reserva.setData_checkin(rs.getString(10));
                      reserva.setNotificacao(rs.getInt(11));
                      reserva.setValor(Integer.parseInt(rs.getString(12)));
+                     reserva.setTelefone(rs.getString(13));
                      reservas.add(reserva);
                 }
             }
@@ -160,6 +165,7 @@ public class ReservaDAO
                      reserva.setData_checkin(rs.getString(10));
                      reserva.setNotificacao(rs.getInt(11));
                      reserva.setValor(Integer.parseInt(rs.getString(12)));
+                     reserva.setTelefone(rs.getString(13));
                      reservas.add(reserva);
                 }
             }
@@ -190,6 +196,7 @@ public class ReservaDAO
                      reserva.setData_checkin(rs.getString(10));
                      reserva.setNotificacao(rs.getInt(11));
                      reserva.setValor(Integer.parseInt(rs.getString(12)));
+                     reserva.setTelefone(rs.getString(13));
                      reservas.add(reserva);
                 }
             }
@@ -215,11 +222,31 @@ public class ReservaDAO
             }
         }
     }
+	
+	public void alterarReserva2(int id) throws SQLException 
+	{
+        String update = "UPDATE Reserva SET status = ? Where id_reserva = ? "; 
+        try (PreparedStatement pstmt = conexao.prepareStatement(update, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        	pstmt.setString(1,"Finalizado");
+        	pstmt.setInt(2, id);
+            int resultado = pstmt.executeUpdate();
+            if (resultado == 1)
+            {
+            
+				System.out.println("\nUpdate bem sucedido.");
+            } 
+            else 
+            {
+                System.out.println("Rip Update.");
+            }
+        }
+    }
 	public void ConfirmarCheckIn( int id) throws SQLException 
 	{
-        String update = "UPDATE Reserva SET status = 'Confirmado' Where id_reserva = ? "; 
+        String update = "UPDATE Reserva SET status = 'Confirmado', data_checkin = ?  Where id_reserva = ? "; 
         try (PreparedStatement pstmt = conexao.prepareStatement(update, PreparedStatement.RETURN_GENERATED_KEYS)) {
-        	pstmt.setInt(1, id);
+        	pstmt.setString(1,LocalDate.now().toString());
+        	pstmt.setInt(2, id);
             int resultado = pstmt.executeUpdate();
             if (resultado == 1)
             {

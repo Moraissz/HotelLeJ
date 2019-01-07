@@ -35,7 +35,7 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 @Controller
 public class UserController {
 	@Inject
-	private Reserva reserva;
+	static private Reserva reserva;
 	@Inject
     private Result result;
 	
@@ -45,8 +45,10 @@ public class UserController {
 		//System.out.println(usuarioAtual.getPrincipal( ).toString( ));
 		
 	}
-	public Reserva alterarReserva() {
-		 
+	
+	public Reserva alterarReserva() 
+	{
+		
 		try {
 			DAOFactory.abrirConexao();
 			ReservaDAO dao = DAOFactory.criarReservaDAO();
@@ -62,6 +64,7 @@ public class UserController {
 				e.printStackTrace();
 			}
 		}
+		
 		return reserva;
 	}
 	public void alterarPerfil() {
@@ -70,31 +73,44 @@ public class UserController {
 	public void buscarReserva() {
 		
 	}
-	public Reserva reservaBuscada(int id) {
-			reserva.setId_reserva(id);
-			int tamanho1 = 0;
+	public Reserva reservaBuscada(int id) throws SQLException {
+		    Reserva reserva2 = new Reserva();
+			int tamanho1 = -1;
 			Boolean isCheckInDay = false;
-			try {
+			Boolean isCheckInDay2 = false;
+			
+			
 				DAOFactory.abrirConexao();
 				ReservaDAO dao = DAOFactory.criarReservaDAO();
-				reserva = dao.buscarreserva(id);
-				Period periodo1 = Period.between(LocalDate.parse(reserva.getData_entrada()),LocalDate.now()); //data saida é exclusivo
-				tamanho1 = periodo1.getDays();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally {
-				try {
-					DAOFactory.fecharConexao();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				
+				reserva2 = dao.buscarreserva(id);
+				
+				DAOFactory.fecharConexao();
+				
+				if(reserva2==null)
+				{
+					isCheckInDay2 = tamanho1 >= 0 ?  true :false; 
+					result.include("checkInDay2", isCheckInDay2);
+					return reserva;
 				}
-			}
-			System.out.println("Tamanho1" + tamanho1);
-			isCheckInDay = tamanho1 == 1 || tamanho1 == 0 ?  true :false; 
-			result.include("checkInDay", isCheckInDay);
-			return reserva;
+				else
+				{
+					reserva=reserva2;
+					Period periodo1 = Period.between(LocalDate.now(),LocalDate.parse(reserva.getData_entrada())); //data saida é exclusivo
+					tamanho1 = periodo1.getDays();
+				
+				     System.out.println("Tamanho1: " + tamanho1);
+				     
+				     isCheckInDay = tamanho1 == 1 || tamanho1 == 0 ?  true :false; 
+				     result.include("checkInDay", isCheckInDay);
+				     
+				     isCheckInDay2 = tamanho1 >= 0 ?  true :false; 
+					 result.include("checkInDay2", isCheckInDay2);
+					 
+					 System.out.println("ADILSONNNNNNNNNNNNNNNNNNNNNNNNNNNN"+reserva.getId_reserva());
+				     return reserva;
+				}
+				
 	}
 	public List<Reserva> todasReservas() {
 		Subject usuarioAtual = SecurityUtils.getSubject( );
@@ -160,20 +176,25 @@ public class UserController {
 		
 	}
 	
-	public void sucesso(String dataEntrada, String dataSaida) {
+	public void sucesso(String dataEntrada, String dataSaida) 
+	{
+		
 		List<Reserva> reservasQuarto = new ArrayList<>();
 		List<Reserva> reservas= new ArrayList<>();
 		LocalDate dateEntrada = LocalDate.parse(dataEntrada);
 		LocalDate dateSaida = LocalDate.parse(dataSaida);
 		Boolean estado = null;
 		String mensagem = "";
+		
+		System.out.println("ALOOOOOOOOOOOOOOOOOOOOO:" +reserva.getId_reserva());
 		try {
 			DAOFactory.abrirConexao();
 			ReservaDAO dao = DAOFactory.criarReservaDAO();
 			reserva = dao.buscarreserva(reserva.getId_reserva());
-			reservasQuarto = dao.buscar_por_quarto(reserva.getNumero_quarto(), reserva.getNumero_andar());
+			
+			reservas = dao.buscar_por_quarto(reserva.getNumero_quarto(), reserva.getNumero_andar());
 			for(Reserva reservaAtual: reservasQuarto){
-				  if(reservaAtual.getStatus().equals("Reservado") && reservaAtual.getId_reserva() != reserva.getId_reserva()) {
+				  if((reservaAtual.getStatus().equals("Reservado") || reservaAtual.getStatus().equals("Confirmado") ) && reservaAtual.getId_reserva() != reserva.getId_reserva()) {
 					  reservas.add(reservaAtual);
 				  }
 				}
@@ -182,7 +203,7 @@ public class UserController {
 				   LocalDate dataSaidaReserva = LocalDate.parse(reservaAtual.getData_saida());
 				   estado = Datas.comparardatas(dateEntrada, dateSaida, dataInicioReserva, dataSaidaReserva);
 				   if(!estado) {
-					   mensagem = "Você nao pode alterar para esta data";
+					   mensagem = "Você não pode alterar para esta data";
 					   break;
 				   }
 				}
@@ -201,8 +222,8 @@ public class UserController {
 				e.printStackTrace();
 			}
 		}
+		System.out.println(mensagem);
 		result.include("mensagem", mensagem);
-		
 		
 	}
 	public Download relatorio() {
@@ -215,7 +236,7 @@ public class UserController {
 		      arquivoJasper = getClass().getResourceAsStream("/RelatorioUsuario.jasper");
 		      var conexao = ConexaoFactory.getConexao();
 		      Map<String, Object> parametros = new HashMap<>();
-	           parametros.put("usuarioAtual", usuarioAtual.getPrincipal().toString());
+	          parametros.put("usuarioAtual", usuarioAtual.getPrincipal().toString());
 		      JasperPrint print = JasperFillManager.fillReport(arquivoJasper, parametros ,conexao);
 
 		      JRExporter exporter = new JRPdfExporter();
